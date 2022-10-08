@@ -160,4 +160,4 @@ HashCode:
 представленные классом RuntimeException и его наследниками, которые могут не обрабатываться блоком catch и не быть 
 описанными в заголовке метода.
 
-![throwable_hierarchy.png](png/throwable_hierarchy.png)
+![throwable_hierarchy.png](png/throwable_hierarchy.png) 
