@@ -36,9 +36,36 @@ java.util.Collection - один из основных интерфейсов Jav
 FIFO - Queue  
 FILO - Stack
 
+### Сложность операций
+**ArrayList**  
+add(element) - O(1). С созданием нового массива O(N)  
+add(element, index) - O(N)  
+get(index) - O(1)  
+remove(index) - O(N)  
+
+**LinkedList**  
+add(element) - O(1)  
+add(element, index) - O(N)  
+get(index) - O(N)  
+remove(index) - O(N)  
+
+**HashMap, LinkedHashMap**  
+get(key) - O(1), если нет коллизии. Если есть - O(logN).  
+put(key, element) - O(1), если нет коллизии. Если есть - O(logN).  
+
+**TreeMap**  
+get(key) - O(logN).  
+put(key, element) - O(logN).  
+
+**HashSet, LinkedHashSet**  
+add(), remove(), contains() - O(1)  
+
+**TreeSet**  
+add(), remove(), contains() - O(logN)
+
 ### ArrayList vs LinkedList
 ArrayList это список, реализованный на основе массива, а LinkedList — это классический двусвязный список, основанный 
-на объектах с ссылками между ними.
+на объектах со ссылками между ними.
 
 ArrayList:
 + Доступ по индексу за O(1)
@@ -83,6 +110,16 @@ HashMap состоит из «корзин» (bucket). С технической
 элемента перезаписывается.
 5) Если же предыдущий шаг не выявил совпадений, будет вызван метод addEntry(hash, key, value, index) для добавления 
 нового элемента.
+
+### Как устроен LinkedHashMap
+Идентично HashMap, но каждый Entry хранит указатель на предыдущий и следующий Entry.
+
+### Как устроен TreeMap
+TreeMap работает на основе красно-черного дерева, хеш не используется. Ключ используется для навигации и сортировки по
+дереву.
+
+### Как устроен любой Set
+Аналогично идентичной реализации Map, но хранится только ключ, без значения.
 
 ### В чем отличия TreeSet и HashSet?
 TreeSet обеспечивает упорядоченно хранение элементов в виде красно-черного дерева. Сложность выполнения основных 
