@@ -206,3 +206,77 @@ HashCode:
 `serialVersionUID` нужно изменять при внесении в класс несовместимых изменений, например при удалении какого-либо его 
 атрибута.
 
+# Java reflection API
+
+### Dynamic proxies
+Динамические прокси Java - объекты, которые оборачивают исходный объект и перенаправляют ему все вызовы. Обычно они 
+выполняют какую-нибудь служебную работу перед вызовом функции: записи в лог, замер времени работы и тд.
+
+Перенаправление вызовов метода происходит с помощью `InvocationHandler`. Все вызовы адресуются методу 
+`InvocationHandler.handle`, а этот метод адресует вызовы дальше исходному объекту.
+
+```java
+
+public class LoggingInvocationHandler implements InvocationHandler {
+
+    private static Logger LOGGER = LoggerFactory.getLogger(LoggingInvocationHandler.class);
+
+    @Override
+    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+        LOGGER.info("Invoked method: {}", method.getName());
+
+        return method.invoke(args);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Cat dynamicProxyCat = (Cat) java.lang.reflect.Proxy.newProxyInstance(
+                Main.class.getClassLoader(),
+                new Class[] { Cat.class },
+                new LoggingInvocationHandler()
+        );
+
+        dynamicProxyCat.meow(); // Invoked method: meow
+    }
+}
+
+
+```
+
+
+### Dynamic and Static class loading
+Джава лениво загружает необходимые ей классы в рантайме. Все классы изначально скомпилированы, но чтобы не держать
+в памяти (в стеке) данные обо всех классах, джава подгружает не все классы сразу.
+
+Перед стартом приложения джава смотрит Main класс, загружает его и все классы, что используются в Main. Далее она 
+переходит в используемые классы и делает то же самое. Это происходит еще во время этапа компиляции и называется Static
+class loading.
+
+Динамическая загрузка классов нужна, чтобы подгрузить классы, которые статическая загрузка найти не смогла. Например,
+какое-то модульное приложение, в рантайм к которому подложили новый жарник. Особенно остро стоит вопрос, если 
+приложение statefull и не хочется сбрасывать состояние при перезапуске. Динамическая подгрузка происходит с помощью
+ClassLoader:
+
+```java
+
+public class MainClass {
+
+    public static void main(String[] args) {
+        ClassLoader classLoader = MainClass.class.getClassLoader();
+
+        try {
+            Class dynamicClass = classLoader.loadClass("ru.example.MyDynamicClass");
+            System.out.println("MyDynamicClass.getName() = " + dynamicClass.getName());
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+}
+```
+
+Динамическая перезагрузка класса - тема отдельная и сложная. Перед загрузкой класса ClassLoader проверяет, а не был ли
+еще загружен этот класс. Если был, то перезагрузка не происходит. В качестве обходного пути можно использовать
+другой ClassLoader отличный от первого, но подгруженный таким ClassLoader класс нельзя привести к подгруженному
+классу первого ClassLoader. Поскольку в идентификацию класса так же входит название ClassLoader, который его загрузил.
+В качестве решения - приводить подгруженный другим ClassLoader класс к общему интерфейсу.
