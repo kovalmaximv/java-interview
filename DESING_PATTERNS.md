@@ -151,6 +151,225 @@ public class Director {
 это в едином коде, но гораздо легче выделить модуль GUI под каждую платформу и единый API ко всему этому делу. Эти
 два модуля можно развивать независимо.
 
+### Компоновщик
+Компоновщик - структурный паттерн, который позволяет сгруппировать множество объектов в древовидную структуру, а затем
+работать с ней, как будто это единый объект. Таким образом вызов к дереву делегируется каждому объекту в этом дереве.
+
+```java
+public interface Saleable {
+    double getPrice();
+}
+
+public class Good implements Saleable {
+    // ...
+    public double getPrice() {
+        // return its own price
+    }
+}
+
+public class Package implements Saleable {
+    // ...
+    List<Good> goods;
+    
+    public double getPrice() {
+        // delegate to Good in List<Good> goods
+    }
+}
+
+public class Order implements Saleable {
+    // ...
+    List<Package> packages;
+    
+    public double getPrice() {
+        // delegate to Package in List<Package>
+    }
+}
+```
+
+Применимость:
+1) Когда нужно работать с древовидное структурой объектов
+2) Когда нужно единообразно трактовать простые и составные объекты
+
+### Декоратор
+Декоратор - структурный паттерн, позволяющий динамически добавлять новую функциональность. Оборачивая какой-то базовый 
+класс в другие классы (путем агрегации). Базовый и оборачивающий класс должны иметь единый интерфейс, чтобы для 
+пользователя не было разницы, к какому классу обращаться. Оборачивающий класс сначала вызывает внутренний класс, затем 
+проделывает свою работу. Таким образом можно обернуть друг в другу много декораторов.
+
+```java
+public interface Notifier {
+    void notify();
+}
+
+// base class
+public class EmailNotifier implements Notifier {
+    public void notify() {
+        // send email notification
+    }
+}
+
+public class SlackNotifier implements Notifier {
+    private final Notifier notifier; 
+    
+    public SlackNotifier(Notifier notifier) {
+        this.notifier = notifier;
+    }
+
+    public void notify() {
+        notifier.notify();
+        // send slack notification
+    }
+}
+
+// and other Notifiers Realization
+
+public class Main {
+    public static void main(String[] args) {
+        EmailNotifier notifier = new EmailNotifier();
+        if (slackEnabled) {
+            notifier = new SlackNotifier(notifier);
+        }
+        notifier.notify();
+    }
+}
+
+```
+
+Применимость:
+1) Когда нужно добавлять функциональность на лету
+2) Когда нельзя расширить функциональность при помощи наследования
+
+### Цепочка команд
+Цепочка команд - поведенческий паттерн, позволяющий передавать запрос последовательно по цепочке обработчиков. Каждый
+обработчик содержит ссылку на следующий. Если работа обработчика завершилась штатно, то запрос передается следующему 
+обработчику. Иначе выкидывается исключение и следующему обработчику запрос не передается.
+
+```java
+interface Handler {
+    void setNext(Handler command);
+    boolean handle(Request request);
+}
+
+public class AuthenticationHandler implements Handler {
+    private Handler next;
+    
+    public void setNext(Handler handler) {
+        this.next = handler;
+    }
+    
+    public boolean handle(Request request) {
+        if (canHandle(request)) {
+            // business logic
+        }
+        if (next != null) {
+            next.handle(request);
+        }
+    }
+}
+```
+
+Применимость:
+1) Когда нужно обрабатывать разные запросы несколькими способами, но заранее неизвестно какие запросы будут приходить
+2) Когда важно, чтобы обработчики запроса выполнились один за другим в строгом порядке
+
+### Состояние
+Состояние - поведенческий паттерн, позволяющий объектам менять поведение в зависимости от состояние и менять состояние 
+в зависимости от каких-либо факторов. Состояние в объекте выделяется в отдельный класс, которому делегируются
+возможные действия с объектом. Класс-состояние знает, как обрабатывать все действия с объектом. Вводится класс контекст,
+содержащий состояние объекта и все возможные действия с ним.
+
+```java
+interface State {
+    void doThis();
+    void doThat();
+}
+
+public class ConcreteState implements State {
+    private Context context;
+    
+    public void doThis() {}
+    public void doThat() {
+        state = new OtherState();
+        context.changeState(state);
+    }
+}
+
+public class Context {
+    private State state;
+    
+    public void changeState(State state) {
+        this.state = state;
+        state.setContext(this);
+    }
+    
+    public void doThis() {
+        state.doThis();
+    }
+    
+    public void doThat() {
+        state.doThat();
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        State initialState = new ConcreteState();
+        Context context = new Context();
+        context.changeState(initialState);
+        
+        context.doThis();
+    }
+}
+```
+
+Применимость:
+1) Когда есть объект, у которого много состояний. Состояние очень сильно влияет на поведение этого объекта. Код 
+поведения часто меняется.
+
+### Стратегия
+Стратегия - поведенческий паттерн, позволяющий выделить семейство схожих алгоритмов в отдельные классы. Такие классы
+можно взаимозаменять во время выполнения программы. Для схожих алгоритмов выделяется интерфейс, а все реализации 
+алгоритма попадают в отдельные классы. Интерфейс алгоритма используется в коде и на его место можно поставить любой из
+классов реализации.
+
+```java
+interface Strategy {
+    void execute();
+}
+
+public class ConcreteStrategy implements Stratergy {
+    public void execute() {}
+}
+
+public class Context {
+    private Strategy strategy;
+    
+    public void setStrategy(Strategy strategy) {
+        this.strategy = strategy;
+    }
+    
+    public void doSomething() {
+        strategy.execute();
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Context context = new Context();
+        Strategy strategy = new ConcreteStrategy();
+        context.setStrategy(strategy);
+        context.doSomething();
+
+        context.setStrategy(anotherStrategy);
+        context.doSomething();
+    }
+}
+```
+
+Применимость:
+1) Когда нужно использовать разные вариации алгоритма внутри одного объекта
+2) Когда у вас множество похожих классов, немного отличающиеся поведением
+
 # Распределенные паттерны
 Паттерны для распределенных систем
 
