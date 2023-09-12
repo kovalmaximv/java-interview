@@ -30,6 +30,9 @@ ApplicationContext по сути представляет собой IOC Contain
 
 Важно, что синглтоны создаются сразу, а прототайпы по требованию (прототайпы в контейнер не складываются).
 
+### Bean lifecycle
+![img.png](png/bean_lifecycle.png)
+
 ### Bean Scope
 
 1) Singletone - один инстанс бина на IOC Container
