@@ -1,5 +1,8 @@
 # Java Collections
-### Collections hierarchy
+
+- [Collections hierarchy](#heap-и-stack-память-в-java)
+
+## Collections hierarchy
 ![collections_hierarchy.png](png/collections_hierarchy.png)
 
 ### В чем разница между классами java.util.Collection и java.util.Collections?
