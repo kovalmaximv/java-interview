@@ -1,11 +1,25 @@
 # Spring
-### Spring IOC
-В Spring Container реализован подход Inversion of Control (IOC), который так же часто называют Dependency Injection 
-(DI). Подход заключается в том, что при создании объектов (точнее сказать бинов) необходимые зависимости для 
+
+- [Spring IOC](#spring-ioc)
+- [Spring Context](#spring-context)
+- [Bean creation lifecycle](#bean-creation-lifecycle)
+- [Bean Scope](#bean-scope)
+- [Трехфазовый конструктор](#трехфазовый-конструктор)
+- [ApplicationContextListener](#applicationcontextlistener)
+- [Обновление Prototype в Singletone](#обновление-prototype-в-singletone)
+- [Параметры Transactional](#параметры-transactional)
+- [Как работает @Transactional spring](#как-работает-transactional-spring)
+- [Генерация proxy](#генерация-proxy)
+- [BeanPostProcessor & BeanFactoryPostProcessor](#beanpostprocessor--beanfactorypostprocessor)
+- [Cacheable](#cacheable)
+
+## Spring IOC
+В Spring Container реализован подход Inversion of Control (IOC), который предоставляет возможности Dependency Injection 
+(DI). Подход заключается в том, что при создании объектов (в спринге это бины) необходимые зависимости для 
 инициализации объекта предоставляет контейнер спринга. Данный процесс по сути является инверсией управления бина, так 
 как контейнер самостоятельно контролирует его создание и размещение в контейнере.
 
-### Spring Context
+## Spring Context
 ApplicationContext по сути представляет собой IOC Container и является главным интерфейсом спринга. Внутри себя он 
 хранит BeanFactory (более базовый контейнер). При помощи ApplicationContext можно настроить, каким образом будут 
 создаваться бины (xml, annotations, configurations). 
@@ -17,7 +31,7 @@ ApplicationContext по сути представляет собой IOC Contain
 1) Message и их интернационализация
 2) Публикация и обработка event
 
-### Bean creation lifecycle
+## Bean creation lifecycle
 1) Инициализируется контекст
 2) BeanDefinitionReader читает и запоминает определение бинов 
 3) BeanFactoryPostProcessor читает BeanDefinition -> как-то их изменяет
@@ -30,10 +44,7 @@ ApplicationContext по сути представляет собой IOC Contain
 
 Важно, что синглтоны создаются сразу, а прототайпы по требованию (прототайпы в контейнер не складываются).
 
-### Bean lifecycle
-![img.png](png/bean_lifecycle.png)
-
-### Bean Scope
+## Bean Scope
 
 1) Singletone - один инстанс бина на IOC Container
 2) Prototype - новый инстанс бина каждый раз по требованию (в контейнер не складываются)
@@ -41,7 +52,7 @@ ApplicationContext по сути представляет собой IOC Contain
 4) Session - инстанс бина живет до тех пор, пока жива http сессия
 5) Global session - инстанс бина живет до тех пор, пока жива глобальная http сессия, для portlet applications
 
-### Трехфазовый конструктор
+## Трехфазовый конструктор
 Идея в том, чтоб настроить Bean 
 
 1) Java construct.
@@ -49,10 +60,10 @@ ApplicationContext по сути представляет собой IOC Contain
 3) ApplicationContextListener. Может работать на этапах, когда контекст уже создан.
 
 **Зачем нужен init метод**  
-Если мы обратимся к спринговым компонентам в контроллере, то получим NPE. BeanInjection происходит после создания 
-работы контроллера. А в init method все зависимости спринга будут на месте.
+Если мы обратимся к спринговым компонентам в конструкторе, то получим NPE. BeanInjection происходит после создания 
+работы конструктора. А в init method все зависимости спринга будут на месте.
 
-### ApplicationContextListener  
+## ApplicationContextListener
 Данный интерфейс позволяет слушать ApplicationContext и как-то реагировать на его lifecycle events.
 Его events в натуральном порядке:
 
@@ -61,7 +72,7 @@ ApplicationContext по сути представляет собой IOC Contain
 3) ContextStoppedEvent
 4) ContextClosedEvent
 
-### BeanFactoryPostProcessor
+## BeanFactoryPostProcessor
 Позволяет повлиять на BeanFactory после его инициализации.
 Например можно поправить определенный BeanDefinition.
 
@@ -71,10 +82,7 @@ ApplicationContext по сути представляет собой IOC Contain
 2) BeanFactoryPostProcessor читает BeanDefinition -> как-то их изменяет МЫ ТУТ
 3) BeanFactory читает BeanDefinition -> кладет бины в IoC container
 
-### Зачем BeanPostProcessor нужно before и after initialization
-before передаст измененный объект в init метод, иногда это нежелательно
-
-### Обновление Prototype в Singletone
+## Обновление Prototype в Singletone
 ```java
 class abstract Singleton {
     public abstract Prototype getPrototype();
@@ -100,10 +108,7 @@ class JavaConfig {
 }
 ```
 
-### ApplicationContextInitilizer
-Отрабатывает, когда контекст только начинает инициализацию, еще ничего не создано
-
-### Параметры Transactional
+## Параметры Transactional
 `propagation` - способ "распространения" транзакций
 
 Выделяется следующие способы:
@@ -120,7 +125,7 @@ class JavaConfig {
 2) rollbackFor и rollbackForClassName - определяет исключения, при которых транзакция БУДЕТ откатана
 
 
-### Как работает @Transactional spring
+## Как работает @Transactional spring
 Transactional работает по принципу Spring AOP. То есть создается класс Proxy, который перехватывает все обращения. В 
 этом proxy и производится необходимая для транзакций работа.
 
@@ -165,24 +170,25 @@ public class ServiceTest{
 Ответ: нет, так как AOP Proxy применяется только для вызова метода извне. Так как test1 вызывает test2 и это метод
 того же класса, AOP Proxy вызван не будет.
 
-### Генерация proxy
-Для классов, имплементирующих интерфейс, прокси генерируется на основе JDK dynamic proxies. Создается прокси для каждого
-интерфейса. В остальных случаях, используется CGLib, который генерирует прокси на основе наследования от target класса.
+## Генерация proxy
+Для классов, имплементирующих интерфейс, прокси генерируется на основе **JDK dynamic proxies**. Создается прокси 
+для каждого интерфейса. В остальных случаях, используется **CGLib**, который генерирует прокси на основе наследования 
+от target класса.
 
-### BeanPostProcessor & BeanFactoryPostProcessor
+## BeanPostProcessor & BeanFactoryPostProcessor
 Идея BeanPostProcessor в том, чтоб реализовать трехфазовый конструктор.
 
 1) Java construct.
 2) @PostConstruct / init method (BeanPostProcessor). Для обращения к механизмам Spring.
 3) ApplicationContextListener. Может работать на этапах, когда контекст уже создан.
 
-BeanFactoryPostProcessor позволяет повлиять на BeanFactory после его инициализации. Например можно поправить 
+BeanFactoryPostProcessor позволяет повлиять на BeanFactory после его инициализации. Например, можно поправить 
 определенный BeanDefinition. Схема работы такая:
 1) BeanDefinitionReader читает XML -> генерит BeanDefinition
 2) BeanFactoryPostProcessor читает BeanDefinition -> как-то их изменяет **МЫ ТУТ**
 3) BeanFactory читает BeanDefinition -> кладет бины в IoC container
 
-### Cacheable
+## Cacheable
 В спринг есть аннотация Cacheable, которая кэширует результат выполнения метода и если метод повторно вызван с тем же
 параметром, то вместо вызова метода возвращается результат из кеша. Можно конкретно указать ключ, по которому 
 будет сравниваться, есть ли данный объект в кеше или нет. 
