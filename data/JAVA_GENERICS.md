@@ -120,4 +120,4 @@ bridge методом.
 
 Попытка написать такой же метод вручную приведет к ошибке компиляции.
 
-![img.png](png/bridge_method.png)
+![img.png](../png/bridge_method.png)

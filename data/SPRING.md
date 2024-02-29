@@ -25,7 +25,7 @@ ApplicationContext по сути представляет собой IOC Contain
 создаваться бины (xml, annotations, configurations). 
 
 Этапы формирования ApplicationContext:
-![img.png](png/spring_application_context.png)
+![img.png](../png/spring_application_context.png)
 
 Так же ApplicationContext представляет следующую функциональность:
 1) Message и их интернационализация
@@ -140,7 +140,7 @@ Transactional работает по принципу Spring AOP. То есть �
 4) Если все-таки была ошибка - откатываем изменения 
 
 Схема работы транзакций:
-![img.png](png/spring_transactional_scheme.png)
+![img.png](../png/spring_transactional_scheme.png)
 
 1) Caller вызывает метод
 2) Вызов перехватывает AOP Proxy

@@ -10,7 +10,7 @@
 - [Как устроен любой Set](#как-устроен-любой-set)
 
 ## Collections hierarchy
-![collections_hierarchy.png](png/collections_hierarchy.png)
+![collections_hierarchy.png](../png/collections_hierarchy.png)
 
 ## Итераторы: fail-fast и fail-safe
 **fail-fast** поведение означает, что при возникновении ошибки или состояния, которое может привести к ошибке, 
@@ -79,7 +79,7 @@ HashMap состоит из «корзин» (bucket). С технической
 корзин capacity * loadFactor. По умолчанию loadFactor = 0.75. По достижению предельного значения, число корзин 
 увеличивается в 2 раза и для всех хранимых элементов вычисляется новое «местоположение» с учетом нового числа корзин.
 
-![hashmap.png](png/hashmap.png)
+![hashmap.png](../png/hashmap.png)
 
 Алгоритм добавления элемента:
 1) Сначала ключ проверяется на равенство null. Если это проверка вернула true, будет вызван метод putForNullKey(value)
