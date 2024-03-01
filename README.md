@@ -90,10 +90,42 @@
 - [Circuit Breaker](data/SPRING_CLOUD.md#circuit-breaker)
 - [Sleuth](data/SPRING_CLOUD.md#sleuth)
 
-## [System design](./SYSTEM_DESIGN.md)
-- [monolith vs microservices](./SYSTEM_DESIGN.md#monolith-vs-microservices)
-- [Взаимодействие между микросервисами](./SYSTEM_DESIGN.md#взаимодействие-между-микросервисами)
-- [Отказоустойчивость](./SYSTEM_DESIGN.md#отказоустойчивость)
+## [Design](data/DESIGN.md)
+- [Назовите основные принципы ООП](data/DESIGN.md#назовите-основные-принципы-ооп)
+- [Преимущества и недостатки ООП](data/DESIGN.md#преимущества-и-недостатки-ооп)
+- [Что такое статическое и динамическое связывание](data/DESIGN.md#что-такое-статическое-и-динамическое-связывание)
+- [SOLID](data/DESIGN.md#solid)
+- [Что такое Dependency Injection](data/DESIGN.md#что-такое-dependency-injection)
+- [DDD](data/DESIGN.md#ddd)
+- [Распределенный кэш vs локальный кэш](data/DESIGN.md#распределенный-кэш-vs-локальный-кэш)
+- [Для чего может использоваться распределенный кэш](data/DESIGN.md#для-чего-может-использоваться-распределенный-кэш)
+- [Распределенный лок (на примере Redis и Redlock)](data/DESIGN.md#распределенный-лок-на-примере-redis-и-redlock)
+- [Методы вытеснения из кэша](data/DESIGN.md#методы-вытеснения-из-кэша)
+
+## [System design](data/SYSTEM_DESIGN.md)
+- [monolith vs microservices](data/SYSTEM_DESIGN.md#monolith-vs-microservices)
+- [Взаимодействие между микросервисами](data/SYSTEM_DESIGN.md#взаимодействие-между-микросервисами)
+- [Отказоустойчивость](data/SYSTEM_DESIGN.md#отказоустойчивость)
+- [Проблема распределенных транзакций](data/SYSTEM_DESIGN.md#проблема-распределенных-транзакций)
+
+## [Design patterns](data/DESIGN_PATTERNS.md)
+- [Фабричный метод](data/DESIGN_PATTERNS.md#фабричный-метод)
+- [Абстрактная фабрика](data/DESIGN_PATTERNS.md#абстрактная-фабрика)
+- [Строитель](data/DESIGN_PATTERNS.md#строитель)
+- [Адаптер](data/DESIGN_PATTERNS.md#адаптер)
+- [Мост](data/DESIGN_PATTERNS.md#мост)
+- [Компоновщик](data/DESIGN_PATTERNS.md#компоновщик)
+- [Декоратор](data/DESIGN_PATTERNS.md#декоратор)
+- [Цепочка команд](data/DESIGN_PATTERNS.md#цепочка-команд)
+- [Состояние](data/DESIGN_PATTERNS.md#состояние)
+- [Стратегия](data/DESIGN_PATTERNS.md#стратегия)
+
+## [Distributed patterns](data/DISTRIBUTED_PATTERNS.md)
+- [CQRS](data/DISTRIBUTED_PATTERNS.md#cqrs)
+- [SAGA](data/DISTRIBUTED_PATTERNS.md#saga)
+- [Kappa](data/DISTRIBUTED_PATTERNS.md#kappa)
+- [2PC](data/DISTRIBUTED_PATTERNS.md#2pc)
+
 
 ## Полезные источники:
 1) Отличный цикл статей по Java GC https://habr.com/ru/articles/269621/
