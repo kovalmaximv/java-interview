@@ -126,6 +126,22 @@
 - [Kappa](data/DISTRIBUTED_PATTERNS.md#kappa)
 - [2PC](data/DISTRIBUTED_PATTERNS.md#2pc)
 
+## [Kafka](data/KAFKA.md)
+- [Основные компоненты Kafka](data/KAFKA.md#основные-компоненты-kafka)
+- [Транзакции в Kafka log](data/KAFKA.md#транзакции-в-kafka)
+- [Transaction log](data/KAFKA.md#transaction-log)
+- [Партиции](data/KAFKA.md#партиции)
+- [Очистка данных](data/KAFKA.md#очистка-данных)
+- [Offset](data/KAFKA.md#offset)
+- [Kafka producer delivery guarantee](data/KAFKA.md#kafka-producer-delivery-guarantee)
+- [Kafka listener delivery guarantee](data/KAFKA.md#kafka-listener-delivery-guarantee)
+- [Rebalance](data/KAFKA.md#rebalance)
+- [Какую функцию выполняет Zookeeper](data/KAFKA.md#какую-функцию-выполняет-zookeeper)
+- [Гарантии порядка](data/KAFKA.md#гарантии-порядка)
+- [Сжатие данных в kafka](data/KAFKA.md#сжатие-данных-в-kafka)
+- [Zero Copy](data/KAFKA.md#zero-copy)
+
+## [Базы данных](DATABASE.md)
 
 ## Полезные источники:
 1) Отличный цикл статей по Java GC https://habr.com/ru/articles/269621/
