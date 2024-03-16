@@ -141,7 +141,31 @@
 - [Сжатие данных в kafka](data/KAFKA.md#сжатие-данных-в-kafka)
 - [Zero Copy](data/KAFKA.md#zero-copy)
 
-## [Базы данных](DATABASE.md)
+## [SQL DB](data/SQL_DATABASE.md)
+- [Что такое «реляционная модель данных»?](data/SQL_DATABASE.md#что-такое-реляционная-модель-данных)
+- [Какие бывают ключи](data/SQL_DATABASE.md#какие-бывают-ключи)
+- [Первичный ключ](data/SQL_DATABASE.md#первичный-ключ)
+- [Внешний ключ](data/SQL_DATABASE.md#внешний-ключ)
+- [Какие существуют нормальные формы](data/SQL_DATABASE.md#какие-существуют-нормальные-формы)
+- [Какие существуют типы связей в базе данных](data/SQL_DATABASE.md#какие-существуют-типы-связей-в-базе-данных)
+- [Индексы](data/SQL_DATABASE.md#индексы)
+- [ACID](data/SQL_DATABASE.md#acid)
+- [Проблемы изолированности транзакций](data/SQL_DATABASE.md#проблемы-изолированности-транзакций)
+- [Уровни изолированности транзакций](data/SQL_DATABASE.md#уровни-изолированности-транзакций)
+- [Репликации](data/SQL_DATABASE.md#репликации)
+- [Партиционирование](data/SQL_DATABASE.md#партиционирование)
+- [OLAP vs OLTP](data/SQL_DATABASE.md#olap-vs-oltp)
+- [Способы оптимизации SQL запросов](data/SQL_DATABASE.md#способы-оптимизации-sql-запросов)
+- [Порядок выполнения SQL команд](data/SQL_DATABASE.md#порядок-выполнения-sql-команд)
+- [Работа SQL оптимизатора](data/SQL_DATABASE.md#работа-sql-оптимизатора)
+
+## [NoSQL DB](data/NOSQL_DATABASE.md)
+- [Виды NoSQL](data/NOSQL_DATABASE.md#виды-nosql)
+- [SQL vs NoSQL](data/NOSQL_DATABASE.md#sql-vs-nosql)
+- [Когда выбирать Key-Value DB](data/NOSQL_DATABASE.md#когда-выбирать-key-value-db)
+- [Когда выбирать Column DB](data/NOSQL_DATABASE.md#когда-выбирать-column-db)
+- [Когда выбирать Document Oriented DB](data/NOSQL_DATABASE.md#когда-выбирать-document-oriented-db)
+- [CAP теорема](data/NOSQL_DATABASE.md#cap-теорема)
 
 ## Полезные источники:
 1) Отличный цикл статей по Java GC https://habr.com/ru/articles/269621/
