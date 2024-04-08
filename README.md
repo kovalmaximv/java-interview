@@ -102,7 +102,10 @@
 - [Sleuth](data/SPRING_CLOUD.md#sleuth)
 
 ## [Hibernate && Spring JPA](data/HIBERNATE.md)
+- [Lazy/Eager loading](data/HIBERNATE.md#lazyeager-loading)
 - [N+1 проблема](data/HIBERNATE.md#n1-проблема)
+- [LazyInitializationException](data/HIBERNATE.md#lazyinitializationexception)
+- [Состояния сущностей](data/HIBERNATE.md#состояния-сущностей)
 
 ## [Design](data/DESIGN.md)
 - [Назовите основные принципы ООП](data/DESIGN.md#назовите-основные-принципы-ооп)
