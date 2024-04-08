@@ -101,6 +101,9 @@
 - [Circuit Breaker](data/SPRING_CLOUD.md#circuit-breaker)
 - [Sleuth](data/SPRING_CLOUD.md#sleuth)
 
+## [Hibernate && Spring JPA](data/HIBERNATE.md)
+- [N+1 проблема](data/HIBERNATE.md#n1-проблема)
+
 ## [Design](data/DESIGN.md)
 - [Назовите основные принципы ООП](data/DESIGN.md#назовите-основные-принципы-ооп)
 - [Преимущества и недостатки ООП](data/DESIGN.md#преимущества-и-недостатки-ооп)
