@@ -174,6 +174,7 @@
 - [ACID](data/SQL_DATABASE.md#acid)
 - [Проблемы изолированности транзакций](data/SQL_DATABASE.md#проблемы-изолированности-транзакций)
 - [Уровни изолированности транзакций](data/SQL_DATABASE.md#уровни-изолированности-транзакций)
+- [Блокировки и deadlock в БД](data/SQL_DATABASE.md#блокировки-и-deadlock-в-бд)
 - [Репликации](data/SQL_DATABASE.md#репликации)
 - [Партиционирование](data/SQL_DATABASE.md#партиционирование)
 - [OLAP vs OLTP](data/SQL_DATABASE.md#olap-vs-oltp)
